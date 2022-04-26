@@ -33,7 +33,7 @@ public class EmployeService {
     public void embaucheEmploye(String nom, String prenom, Poste poste, NiveauEtude niveauEtude, Double tempsPartiel) throws EmployeException, EntityExistsException {
 
         //Récupération du type d'employé à partir du poste
-        String typeEmploye = poste.name().substring(0,1)
+        String typeEmploye = poste.name().substring(0,1);
 
         //Récupération du dernier matricule...
         String lastMatricule = employeRepository.findLastMatricule();
