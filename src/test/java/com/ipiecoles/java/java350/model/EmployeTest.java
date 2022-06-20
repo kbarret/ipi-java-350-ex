@@ -107,7 +107,7 @@ public class EmployeTest {
             Double prime    ){
         //Given
         Employe employe = new Employe("Doe", "John", matricule,
-                                        LocalDate.now().minusYears(nbAnneesAnciennete), 2500d, performance, tauxActivite);
+                LocalDate.now().minusYears(nbAnneesAnciennete), 2500d, performance, tauxActivite);
         //When
         Double primeObtenue = employe.getPrimeAnnuelle();
         //Then
