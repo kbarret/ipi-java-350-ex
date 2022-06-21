@@ -36,6 +36,7 @@
         <appender-ref ref="ERROR_LOG"/>
     </logger>
     <root level="debug">
+        <appender-ref ref="INFO_LOG" />
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
