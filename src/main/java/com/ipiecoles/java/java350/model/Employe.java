@@ -64,14 +64,15 @@ public class Employe {
     }
 
     public Integer getNbRtt(LocalDate d){
-        int i1 = d.isLeapYear() ? 365 : 366;int var = 104;
-        switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-        case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;
+        int i1 = d.isLeapYear() ? 366 : 365;int var = 104; //si annee bisextile alors 366 sinon 365
+        switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){//ecrire test puis passer en parametre
+        case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;//si un test unitaire c'est bien si test avec couverture trop fort
         case FRIDAY:
-        if(d.isLeapYear()) var =  var + 2;
-        else var =  var + 1;
-case SATURDAY:var = var + 1;
-                    break;
+            if(d.isLeapYear()) var =  var + 2;
+            else var =  var + 1;
+            break;
+        case SATURDAY:var = var + 1;
+            break;
         }
         int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate ->
                 localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
@@ -114,8 +115,8 @@ case SATURDAY:var = var + 1;
     }
 
     //Augmenter salaire
-    //public void augmenterSalaire(double pourcentage){}
-
+    public void augmenterSalaire(double pourcentage){}
+    //assertions exeptions
     public Long getId() {
         return id;
     }
