@@ -58,7 +58,7 @@ public class EmployeServiceTest {
         //Given
         Mockito.when(employeRepository.findLastMatricule()).thenReturn(null);
         Mockito.when(employeRepository.findByMatricule("C00001")).thenReturn(null);
-//        Mockito.when(employeRepository.save(null)).thenReturn();
+        Mockito.when(employeRepository.save(Mockito.any(Employe.class))).thenAnswer(AdditionalAnswers.returnsFirstArg());
         //When
         employeService.embaucheEmploye("Doe", "John", Poste.COMMERCIAL, NiveauEtude.MASTER, 1.0);
         //Then
@@ -79,7 +79,7 @@ public class EmployeServiceTest {
         //Given
         Mockito.when(employeRepository.findLastMatricule()).thenReturn("12345");
         Mockito.when(employeRepository.findByMatricule("C12346")).thenReturn(null);
-//        Mockito.when(employeRepository.save(null)).thenReturn();
+        Mockito.when(employeRepository.save(Mockito.any(Employe.class))).thenAnswer(AdditionalAnswers.returnsFirstArg());
         //When
         employeService.embaucheEmploye("Doe", "John", Poste.COMMERCIAL, NiveauEtude.MASTER, 0.5);
         //Then
