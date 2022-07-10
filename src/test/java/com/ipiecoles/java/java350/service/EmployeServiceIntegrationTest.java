@@ -44,4 +44,26 @@ public class EmployeServiceIntegrationTest {
         Assertions.assertThat(employe.getTempsPartiel()).isEqualTo(1);
     }
 
+    @Test
+    public void testCalculPerformanceCommerciale() throws EmployeException {
+        //Given
+        //When
+        employeService.embaucheEmploye("Doe","jhon", Poste.COMMERCIAL, NiveauEtude.MASTER,1.0);
+        employeService.calculPerformanceCommercial("C00001",100000L,100000L);
+        //then
+        Employe employe = employeRepository.findByMatricule("C00001");
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(2);
+
+    }
+
+    @Test
+    public void testavgPerformanceWhereMatriculeStartsWith() throws EmployeException {
+        //Given
+        //When
+        employeService.embaucheEmploye("Doe","jhon", Poste.COMMERCIAL, NiveauEtude.MASTER,1.0);
+        //then
+        Assertions.assertThat(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).isEqualTo(1);
+
+    }
+
 }

@@ -115,8 +115,22 @@ public class Employe {
     }
 
     //Augmenter salaire
-    public void augmenterSalaire(double pourcentage){}
-    //assertions exeptions
+    public Double augmenterSalaire(double pourcentage){
+        Double salaireAugmenter = null;
+        salaireAugmenter = this.salaire * ((100.0 + pourcentage)/100);
+        if(pourcentage < 0){
+            return  this.salaire;
+
+        }
+        else{
+            return salaireAugmenter;
+        }
+
+
+    }
+
+
+
     public Long getId() {
         return id;
     }
