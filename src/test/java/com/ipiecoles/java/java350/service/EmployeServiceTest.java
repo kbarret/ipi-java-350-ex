@@ -95,4 +95,73 @@ public class EmployeServiceTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1064.85);
         Assertions.assertThat(employe.getTempsPartiel()).isEqualTo(0.5);
     }
+
+    @Test
+    public void testCalculPerformanceCommercialPlus20Pourcents() throws EmployeException {
+        //Given
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe());
+        //When
+        employeService.calculPerformanceCommercial("C00001",130000L,100000L);
+        //Then
+//        Employe employe = employeRepository.findByMatricule("C00001");
+        ArgumentCaptor<Employe> employeArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        Mockito.verify(employeRepository).save(employeArgumentCaptor.capture());
+        Employe employe = employeArgumentCaptor.getValue();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(6);
+    }
+    @Test
+    public void testCalculPerformanceCommercialEntre5Et20Pourcents() throws EmployeException {
+        //Given
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe());
+        //When
+        employeService.calculPerformanceCommercial("C00001",109000L,100000L);
+        //Then
+//        Employe employe = employeRepository.findByMatricule("C00001");
+        ArgumentCaptor<Employe> employeArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        Mockito.verify(employeRepository).save(employeArgumentCaptor.capture());
+        Employe employe = employeArgumentCaptor.getValue();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(3);
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialEntreMoins5EtMoins20Pourcents() throws EmployeException {
+        //Given
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe());
+        //When
+        employeService.calculPerformanceCommercial("C00001",85000L,100000L);
+        //Then
+//        Employe employe = employeRepository.findByMatricule("C00001");
+        ArgumentCaptor<Employe> employeArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        Mockito.verify(employeRepository).save(employeArgumentCaptor.capture());
+        Employe employe = employeArgumentCaptor.getValue();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(2);
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialEntreMoins5Et5Pourcents() throws EmployeException {
+        //Given
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe());
+        //When
+        employeService.calculPerformanceCommercial("C00001",97000L,100000L);
+        //Then
+//        Employe employe = employeRepository.findByMatricule("C00001");
+        ArgumentCaptor<Employe> employeArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        Mockito.verify(employeRepository).save(employeArgumentCaptor.capture());
+        Employe employe = employeArgumentCaptor.getValue();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(employe.getPerformance());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialMoins20Pourcents() throws EmployeException {
+        //Given
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe());
+        //When
+        employeService.calculPerformanceCommercial("C00001",75000L,100000L);
+        //Then
+//        Employe employe = employeRepository.findByMatricule("C00001");
+        ArgumentCaptor<Employe> employeArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        Mockito.verify(employeRepository).save(employeArgumentCaptor.capture());
+        Employe employe = employeArgumentCaptor.getValue();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(2);
+    }
 }

@@ -1,11 +1,15 @@
 package com.ipiecoles.java.java350.model;
 
+import com.ipiecoles.java.java350.exception.EmployeException;
+import io.cucumber.java8.Da;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
+
+import static org.mockito.Mockito.when;
 
 public class EmployeTest {
 
@@ -112,5 +116,66 @@ public class EmployeTest {
         Double primeObtenue = employe.getPrimeAnnuelle();
         //Then
         Assertions.assertThat(primeObtenue).isEqualTo(prime);
+    }
+    @Test
+    public void testAgmenterSalaire(){
+        //Given
+        Employe employe = new Employe();
+        employe.setSalaire(1521.22);
+
+        //When
+        Double Salaire = employe.augmenterSalaire(10.0);
+
+        //Then        // => 0
+        Assertions.assertThat(Salaire).isEqualTo(1673.342);
+
+    }
+
+    @Test
+    public void testAgmenterSalaireDiminuer(){
+        //Given 1521.22
+        Employe employe = new Employe();
+        employe.setSalaire(1521.22);
+
+        //When
+        Double Salaire = employe.augmenterSalaire(-10.0);
+
+        //Then        // => 0
+        Assertions.assertThat(Salaire).isEqualTo(1521.22);
+
+    }
+
+    @Test
+    public void testAgmenterSalaireEgal(){
+        //Given 1521.22
+        Employe employe = new Employe();
+        employe.setSalaire(1521.22);
+
+        //When
+        Double Salaire = employe.augmenterSalaire(0.0);
+
+        //Then        // => 0
+        Assertions.assertThat(Salaire).isEqualTo(1521.22);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "2019,8",
+            "2021,10",
+            "2022,10",
+            "2032,11"
+    })
+    //@Test
+    public void testGetNbRtt(
+        int annee,
+        Integer rtt
+        ){
+        //Given
+        Employe employe = new Employe("Doe", "John", "T12345",
+                LocalDate.now().minusYears(5), 2500d,1, 1.0);
+        //When
+        Integer rttObtenue = employe.getNbRtt(LocalDate.of(annee, 1, 1));
+        //Then
+        Assertions.assertThat(rttObtenue).isEqualTo(rtt);
     }
 }
